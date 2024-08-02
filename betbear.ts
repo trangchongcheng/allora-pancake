@@ -135,4 +135,4 @@ const claimEpoch = async (currentEpoch: any, address: string) => {
     }
   }
 };
-setInterval(betBear, 240000);
+setInterval(betBear, 6 * 59 * 1000);

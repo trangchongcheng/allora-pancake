@@ -30,6 +30,11 @@ const betValue = 0.00001;
 npm install
 ```
 
+```
+npm install -g typescript ts-node
+
+```
+
 3. Run code
 
 ```
