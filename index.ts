@@ -2,7 +2,7 @@ import { Web3 } from "web3";
 import config from "./config";
 const fs = require("fs");
 
-const abiContent = JSON.parse(fs.readFileSync("./allora/abi.json", "utf8"));
+const abiContent = JSON.parse(fs.readFileSync("./abi.json", "utf8"));
 const web3 = new Web3("https://arb1.arbitrum.io/rpc");
 
 const contractAddress = "0x1cdc19b13729f16c5284a0ace825f83fc9d799f4";
