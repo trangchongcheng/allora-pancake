@@ -10,7 +10,15 @@ const contract = new web3.eth.Contract(abiContent, contractAddress);
 
 const { bettingValues, wallets } = config;
 
+let continueRunning = true;
+
 const main = async () => {
+  if (!continueRunning) {
+    console.log("1 trong các ví bị hết tiền, script tạm thời dừng lại");
+    clearInterval(intervalId);
+    return;
+  }
+
   let totalBalance = 0;
   console.log(
     `\n========================  STARTING ========================\n`
@@ -26,6 +34,7 @@ const main = async () => {
       const curentBalance = await getBalance(address);
       if (curentBalance < 0.001) {
         console.log(`\nSố dư trong ví còn quá ít, số dư: ${curentBalance}`);
+        continueRunning = false;
       } else {
         const betValueInWei = web3.utils.toWei(randomBettingValue(), "ether");
         const currentEpoch: any = await contract.methods.currentEpoch().call();
@@ -158,4 +167,4 @@ const randomBettingValue = () => {
   const randomIndex = Math.floor(Math.random() * bettingValues.length);
   return bettingValues[randomIndex];
 };
-setInterval(main, 6 * 59 * 1000);
+const intervalId = setInterval(main, 6 * 59 * 1000);
